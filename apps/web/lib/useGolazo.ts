@@ -22,6 +22,9 @@ export function useGolazo(): GolazoChat {
     agentRef.current ??= new HttpAgent({
       url: "/api/agent",
       threadId: crypto.randomUUID(),
+      // HttpAgent calls its fetch as `this.fetch(...)`, which detaches the
+      // built-in from `window` and throws "Illegal invocation" — re-bind it.
+      fetch: (url, init) => globalThis.fetch(url, init),
     });
     const agent = agentRef.current;
 
