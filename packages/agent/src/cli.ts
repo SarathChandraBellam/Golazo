@@ -12,7 +12,7 @@ async function main() {
   const agent = await createWorldCupAgent();
   const config = { configurable: { thread_id: `cli-${Date.now()}` } };
 
-  console.log("⚽ WC-Assist — World Cup stats agent (Ctrl+C or 'exit' to quit)");
+  console.log("⚽ Golazo — World Cup stats agent (Ctrl+C or 'exit' to quit)");
   console.log(`   model: ${process.env.OPENROUTER_MODEL ?? "default"}\n`);
 
   const rl = createInterface({ input: process.stdin, output: process.stdout });

@@ -1,5 +1,5 @@
 {
-  "name": "@wc-assist/agent",
+  "name": "@golazo/agent",
   "version": "0.1.0",
   "type": "module",
   "description": "World Cup stats agent built on LangGraph.js + OpenRouter free models",

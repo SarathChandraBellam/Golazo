@@ -75,8 +75,8 @@ export function createLLM(options?: { model?: string; temperature?: number }) {
     configuration: {
       baseURL: "https://openrouter.ai/api/v1",
       defaultHeaders: {
-        "HTTP-Referer": "https://github.com/wc-assist",
-        "X-Title": "wc-assist",
+        "HTTP-Referer": "https://github.com/golazo",
+        "X-Title": "golazo",
       },
     },
   });

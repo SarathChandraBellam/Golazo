@@ -1,4 +1,4 @@
-# wc-assist
+# ⚽ Golazo
 
 World Cup stats agent monorepo. Ask any question about FIFA World Cup history
 (men's 1930–2022, women's 1991–2019) and the agent answers from the
@@ -38,7 +38,7 @@ pnpm download-data     # fetch dataset CSVs (also happens automatically on first
 ```sh
 pnpm agent             # interactive CLI chat
 pnpm test              # deterministic tool tests (no LLM)
-pnpm --filter @wc-assist/agent test:eval   # end-to-end evals on the smaller test model
+pnpm --filter @golazo/agent test:eval   # end-to-end evals on the smaller test model
 ```
 
 ## Models

@@ -1,13 +1,13 @@
 {
-  "name": "wc-assist",
+  "name": "golazo",
   "private": true,
   "version": "0.1.0",
   "description": "World Cup stats agent monorepo — LangGraph.js agent + (future) AG-UI front end",
   "scripts": {
-    "agent": "pnpm --filter @wc-assist/agent chat",
+    "agent": "pnpm --filter @golazo/agent chat",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
-    "download-data": "pnpm --filter @wc-assist/agent download-data"
+    "download-data": "pnpm --filter @golazo/agent download-data"
   },
   "engines": {
     "node": ">=20"
