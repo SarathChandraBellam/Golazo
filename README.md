@@ -8,8 +8,9 @@ World Cup stats agent monorepo. Ask any question about FIFA World Cup history
 
 ```
 packages/
-  agent/        LangGraph.js agent + skills + dataset tools
-apps/           (planned) AG-UI web app with generative UI cards, no login
+  agent/        LangGraph.js agent + skills + dataset tools + simulator
+apps/
+  web/          Next.js chat UI — AG-UI protocol endpoint + generative UI cards, no login
 ```
 
 ## Stack
@@ -19,11 +20,19 @@ apps/           (planned) AG-UI web app with generative UI cards, no login
 - **OpenRouter free models** — main model and a smaller model for tests/evals,
   both configurable via env.
 - **Skills** — tools are grouped into skills (`tournament-stats`,
-  `player-stats`, `match-analysis`), each with its own instructions; the system
-  prompt is composed from them.
-- **Generative-UI ready** — every tool returns `{ ui: { component, title }, data }`
-  so the future AG-UI front end can render cards (leaderboard, player-card,
-  head-to-head, standings, …) straight from tool results.
+  `player-stats`, `match-analysis`, `simulation`), each with its own
+  instructions; the system prompt is composed from them.
+- **Simulator** — Monte Carlo match and knockout-bracket simulations from a
+  Poisson model fit on recency-weighted historical results (incl. penalty
+  shootouts at the real historical conversion rate).
+- **AG-UI protocol** — `apps/web/app/api/agent/route.ts` streams the run as
+  AG-UI SSE events (`RUN_STARTED`, `TEXT_MESSAGE_*`, `TOOL_CALL_*`,
+  `TOOL_CALL_RESULT`, `RUN_FINISHED`); the browser consumes it with
+  `@ag-ui/client`.
+- **Generative UI cards** — every tool returns `{ ui: { component, title }, data }`
+  and the front end renders a matching card (leaderboard, player-card,
+  head-to-head, standings, match-sim probability bars, …) straight from tool
+  results.
 
 ## Setup
 
@@ -36,8 +45,9 @@ pnpm download-data     # fetch dataset CSVs (also happens automatically on first
 ## Use
 
 ```sh
+pnpm --filter web dev  # chat UI at http://localhost:3000
 pnpm agent             # interactive CLI chat
-pnpm test              # deterministic tool tests (no LLM)
+pnpm test              # deterministic tool + simulator tests (no LLM)
 pnpm --filter @golazo/agent test:eval   # end-to-end evals on the smaller test model
 ```
 

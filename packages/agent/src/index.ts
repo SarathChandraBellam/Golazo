@@ -10,3 +10,5 @@ export {
   FREE_MODEL_FALLBACKS,
 } from "./llm.js";
 export type { ToolResult } from "./tools/helpers.js";
+export { simulateMatch, simulateTournament } from "./sim/simulate.js";
+export { computeStrengths, findStrength } from "./sim/strengths.js";

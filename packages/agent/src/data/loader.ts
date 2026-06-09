@@ -23,6 +23,7 @@ export const DATASET_FILES = [
   "award_winners",
   "teams",
   "squads",
+  "penalty_kicks",
 ] as const;
 
 export type TableName = (typeof DATASET_FILES)[number];

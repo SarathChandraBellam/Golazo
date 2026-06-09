@@ -6,6 +6,7 @@ import {
 } from "../tools/tournaments.js";
 import { searchPlayers, getPlayerStats, topGoalScorers } from "../tools/players.js";
 import { findMatches, headToHead, getTeamRecord } from "../tools/matches.js";
+import { simulateMatchTool, simulateTournamentTool } from "../tools/simulation.js";
 
 /**
  * A skill bundles related tools with instructions on when/how to use them.
@@ -51,10 +52,22 @@ export const matchAnalysisSkill: AgentSkill = {
   tools: [findMatches, headToHead, getTeamRecord],
 };
 
+export const simulationSkill: AgentSkill = {
+  name: "simulation",
+  description: "Hypothetical match and tournament simulations (Monte Carlo)",
+  instructions: [
+    "For 'who would win X vs Y' or 'what if' questions use simulate_match (knockout=true if it's an elimination game).",
+    "For 'simulate a tournament/bracket' use simulate_tournament with teams in bracket order.",
+    "Always tell the user the simulation is based on historical World Cup results, not current form.",
+  ].join("\n"),
+  tools: [simulateMatchTool, simulateTournamentTool],
+};
+
 export const allSkills: AgentSkill[] = [
   tournamentStatsSkill,
   playerStatsSkill,
   matchAnalysisSkill,
+  simulationSkill,
 ];
 
 export function buildSystemPrompt(skills: AgentSkill[] = allSkills): string {

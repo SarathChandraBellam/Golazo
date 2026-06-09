@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+:root {
+  --pitch: #070a07;
+  --turf: #0e140e;
+  --turf-raised: #131b13;
+  --line: rgba(239, 243, 232, 0.09);
+  --line-strong: rgba(239, 243, 232, 0.18);
+  --chalk: #eff3e8;
+  --muted: #93a191;
+  --volt: #cdfb45;
+  --volt-soft: rgba(205, 251, 69, 0.13);
+  --away: #ff5c7a;
+  --away-soft: rgba(255, 92, 122, 0.13);
+  --gold: #f2c94c;
+}
+
+@theme inline {
+  --color-pitch: var(--pitch);
+  --color-turf: var(--turf);
+  --color-turf-raised: var(--turf-raised);
+  --color-chalk: var(--chalk);
+  --color-muted: var(--muted);
+  --color-volt: var(--volt);
+  --color-away: var(--away);
+  --color-gold: var(--gold);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background-color: var(--pitch);
+  color: var(--chalk);
+  font-family: var(--font-body), sans-serif;
+  /* mown-grass stripes + floodlight from the top */
+  background-image:
+    radial-gradient(
+      120% 70% at 50% -10%,
+      rgba(205, 251, 69, 0.07) 0%,
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 110px,
+      rgba(239, 243, 232, 0.014) 110px,
+      rgba(239, 243, 232, 0.014) 220px
+    );
+  background-attachment: fixed;
+}
+
+/* film grain */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+/* broadcast lower-third card: clipped corner + volt edge */
+.card {
+  position: relative;
+  background: linear-gradient(180deg, var(--turf-raised), var(--turf));
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--volt);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  animation: rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.card-title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* probability / stat bars grow in */
+.bar {
+  animation: bar-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.15s;
+}
+@keyframes bar-in {
+  from {
+    width: 0;
+  }
+}
+
+/* streaming caret */
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--volt);
+  animation: blink 0.9s steps(2) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* tool activity ticker */
+.ticker {
+  position: relative;
+  overflow: hidden;
+}
+.ticker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(205, 251, 69, 0.12) 50%,
+    transparent 80%
+  );
+  animation: sweep 1.4s linear infinite;
+}
+@keyframes sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+::selection {
+  background: var(--volt);
+  color: var(--pitch);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
