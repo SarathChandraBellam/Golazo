@@ -1,0 +1,16 @@
+{
+  "name": "wc-assist",
+  "private": true,
+  "version": "0.1.0",
+  "description": "World Cup stats agent monorepo — LangGraph.js agent + (future) AG-UI front end",
+  "scripts": {
+    "agent": "pnpm --filter @wc-assist/agent chat",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "download-data": "pnpm --filter @wc-assist/agent download-data"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.22.0"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@wc-assist/agent",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "World Cup stats agent built on LangGraph.js + OpenRouter free models",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "chat": "tsx src/cli.ts",
+    "download-data": "tsx scripts/download-data.ts",
+    "test": "vitest run",
+    "test:eval": "RUN_EVALS=1 vitest run tests/agent.eval.test.ts"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.66",
+    "@langchain/langgraph": "^0.2.74",
+    "@langchain/openai": "^0.5.18",
+    "csv-parse": "^5.6.0",
+    "dotenv": "^16.5.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  }
+}
